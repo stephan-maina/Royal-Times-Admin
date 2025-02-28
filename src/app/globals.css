@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Apply DM Sans font globally */
 body {
   font-family: var(--font-dm-sans), sans-serif;
 }
 
+/* ========================= */
+/* 🌙 THEME CONFIGURATION   */
+/* ========================= */
 @layer base {
   :root {
+    /* Light Theme Variables */
     --background: 0 0% 100%; /* Light theme background */
     --foreground: 20 14.3% 4.1%; /* Light theme text */
     --border: 220 14% 96%; /* Light theme border */
@@ -15,14 +20,16 @@ body {
     --ring: 220 14% 84%; /* Light theme ring */
     --card: 0 0% 100%; /* Light theme card */
     --card-foreground: 20 14.3% 4.1%;
+
+    /* Primary & Secondary Colors */
     --primary: 220 60% 50%;
     --primary-foreground: 0 0% 100%;
     --secondary: 200 50% 40%;
     --secondary-foreground: 0 0% 100%;
-    /* Add other variables as required */
   }
 
   .dark {
+    /* Dark Theme Variables */
     --background: 20 14.3% 4.1%; /* Dark theme background */
     --foreground: 60 9.1% 97.8%; /* Dark theme text */
     --border: 220 10% 20%; /* Dark theme border */
@@ -34,10 +41,102 @@ body {
     --primary-foreground: 0 0% 100%;
     --secondary: 200 50% 40%;
     --secondary-foreground: 0 0% 100%;
-    /* Add other variables as required */
   }
 
+  /* Apply the background and text color dynamically */
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ========================= */
+/* 🎨 ANIMATIONS            */
+/* ========================= */
+@keyframes baseline {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ink {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes digital {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spray-paint {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* ========================= */
+/* 🏗️ UTILITY CLASSES       */
+/* ========================= */
+.baseline-animation {
+  animation: baseline 0.5s ease-in-out forwards;
+}
+
+.ink-animation {
+  animation: ink 0.5s ease-in-out forwards;
+}
+
+.digital-animation {
+  animation: digital 0.5s ease-in-out forwards;
+}
+
+.spray-paint-animation {
+  animation: spray-paint 0.5s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-animation {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.divider-animation {
+  animation: slideIn 0.5s ease-in-out;
 }

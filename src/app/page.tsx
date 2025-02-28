@@ -5,8 +5,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import { signInAction } from "./actions";
 import { createClient } from "../utils/supabase/client";
-import { toast } from "sonner";
-
+import toast, { Toaster } from "react-hot-toast";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,21 +19,51 @@ const SignInPage = () => {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const supabase = await createClient();
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
-  
+
     if (data.session) {
-      toast.success("Login successful! Redirecting...");
-      router.push("/dashboard");
+      toast.success("Login successful! Redirecting...", {
+        duration: 3000,
+        style: {
+          backgroundColor: "#F58735",
+          color: "white",
+          fontFamily: "DM Sans",
+          fontSize: "0.875rem",
+          fontWeight: 600,
+          whiteSpace: "nowrap",
+        },
+        icon: (
+          <div className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 20 20"
+  fill="#F58735"
+  height="14"
+  width="14"
+>
+  <path
+    fillRule="evenodd"
+    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+    clipRule="evenodd"
+  />
+</svg>
+          </div>
+        ),
+      });
+
+      // Redirect after successful login
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 3000);
     } else if (error) {
       toast.error(error.message);
     }
   };
-  
 
   return (
     <div className="h-screen flex">
@@ -79,12 +108,13 @@ const SignInPage = () => {
                 className="font-sans text-sm font-normal text-[#F58735] hover:underline cursor-pointer"
                 onClick={() => {
                   if (!email) {
-                    toast.warning("Please enter your email to reset your password.");
+                    toast("Please enter your email to reset your password.", {
+                      icon: "⚠️",
+                    });
                   } else {
                     router.push(`/auth/confirm-email?email=${encodeURIComponent(email)}`);
                   }
                 }}
-                
               >
                 Forgot Password ?
               </p>
@@ -167,6 +197,9 @@ const SignInPage = () => {
           />
         </div>
       </div>
+
+      {/* Add Toaster for displaying toast messages */}
+      <Toaster position="bottom-right" />
     </div>
   );
 };

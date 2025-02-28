@@ -18,7 +18,7 @@ const MainCard: React.FC<MainCardProps> = ({
   const isCustomColor = imageBgColor.startsWith("#");
 
   return (
-    <div className="flex justify-between items-center px-6 py-5 w-full md:w-[25%] shadow-lg rounded-xl">
+    <div className="flex justify-between items-center px-6 py-5 w-full md:w-[25%] shadow-lg rounded-xl transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:scale-105">
       {/* Left Section */}
       <div className="flex flex-col gap-2">
         <p className="font-sans text-sm font-normal">{title}</p>

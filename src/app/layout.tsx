@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, DM_Sans } from "next/font/google"; // Import DM Sans
-import "./globals.css"; // Ensure this is imported
+import { Inter, DM_Sans } from "next/font/google";
+import "./globals.css";
 import { ThemeProvider } from "../components/Theme-provider";
-
-// Import Sonner
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "react-hot-toast";
 
 import { SWRConfig } from "swr";
 
-// Define Inter and DM Sans fonts
+// Define fonts
 const inter = Inter({ subsets: ["latin"] });
-const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" }); // Define DM Sans
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 
 export const metadata: Metadata = {
   title: "Royal Times",
@@ -19,16 +17,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <SWRConfig
-      value={{
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-      }}
-    >
+    <SWRConfig value={{ revalidateIfStale: false, revalidateOnFocus: false }}>
       <html lang="en">
         <body className={`${inter.className} ${dmSans.variable}`}>
           <ThemeProvider
@@ -39,8 +30,8 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
-          {/* Global Toaster */}
-          <Toaster />
+          {/* ✅ Only one Toaster */}
+          <Toaster position="bottom-right" />
         </body>
       </html>
     </SWRConfig>
