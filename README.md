@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 npx supabase gen types typescript --project-id "zrdfdqnsjppqucbfptka" --schema public > database.types.ts
+# Royal-Times-Admin
